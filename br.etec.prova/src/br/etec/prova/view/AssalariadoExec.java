@@ -13,7 +13,8 @@ public class AssalariadoExec {
 		Assalariado assalariado = new Assalariado();
 		try {	
 		
-		assalariado.setSalario(1236.00);
+			assalariado.setSalario("800");
+			
 			
 			
 			Connection connection = Conexao.getConnection();
@@ -22,6 +23,8 @@ public class AssalariadoExec {
 			
 				AssalariadoJdbcDao.salvar(assalariado);
 				AssalariadoJdbcDao.listar();
+				//AssalariadoJdbcDao.alterar(assalariado);
+				AssalariadoJdbcDao.excluir(1);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

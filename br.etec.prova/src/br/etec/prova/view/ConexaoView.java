@@ -13,23 +13,24 @@ public class ConexaoView {
 		
 			empregado.setNome("Renan");
 			empregado.setSobrenome("Souza");
-			empregado.setCPF("46075153888");
+			empregado.setCPF("19418484994");
 			
 			
 			Connection connection = Conexao.getConnection();
 			EmpregadoJdbcDao EmpregadoJdbcDao = new EmpregadoJdbcDao(connection);
 			
-
+			
 				EmpregadoJdbcDao.salvar(empregado);
 				EmpregadoJdbcDao.listar();
 				EmpregadoJdbcDao.alterar(empregado);
-				//EmpregadoJdbcDao.excluir(id);
+				EmpregadoJdbcDao.excluir(1);
+				
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
+	
 	}
 
 }

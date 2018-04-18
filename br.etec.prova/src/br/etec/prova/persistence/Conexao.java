@@ -19,6 +19,6 @@ public class Conexao {
 			Class.forName(connectionDriverClass);
 			return DriverManager.getConnection(Conexao.connectionUrl, Conexao.connectionUsername,
 					Conexao.connectionPassword);
-		}
+		}		
 	}
 }

@@ -17,8 +17,8 @@ public class EmpregadoJdbcDao {
 		this.conn = conn;
 	}
 
-	public void salvar(Empregado empregado) throws SQLException {
-		String sql = "insert into empregado(nome, sobrenome,CPF ) values ('"+empregado.getNome()+"','"+empregado.getSobrenome()+"','"+empregado.getCPF()+"')";
+	public void salvar(Empregado c) throws SQLException {
+		String sql = "insert into empregado(nome, sobrenome,CPF ) values ('"+c.getNome()+"','"+c.getSobrenome()+"','"+c.getCPF()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
@@ -28,31 +28,6 @@ public class EmpregadoJdbcDao {
 		String sql = "select * from empregado";
         System.out.println(sql);
         
-	}
-	
-	public void alterar(Empregado empregado) {
-		String sql = "update empregado set nome='"+empregado.getNome()+"',sobrenome='"+empregado.getSobrenome()+"',CPF='"+empregado.getCPF()+"';";
-		System.out.println(sql);
-		PreparedStatement prepareStatement;
-		try {
-			prepareStatement = this.conn.prepareStatement(sql);
-			prepareStatement.executeUpdate();
-            prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-	}
-	
-	public void excluir(int id) {
-		String sql = "delete from empregado where id_empregado='"+id+"';";
-		System.out.println(sql);
-        try {
-    		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
-    		prepareStatement.executeUpdate();
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}                		
 	}
         
 		public List<Empregado> listar() {
@@ -87,4 +62,28 @@ public class EmpregadoJdbcDao {
 		}
 		return empregados;
 	}
+		public void alterar(Empregado c) throws SQLException {
+			String sql = "update empregado set nome='"+c.getNome()+"',sobrenome='"+c.getSobrenome()+"',CPF='"+c.getCPF()+"'where id_empregado='"+c.getId_empregado()+"';";
+			System.out.println(sql);
+			PreparedStatement prepareStatement;
+			try {
+				prepareStatement = this.conn.prepareStatement(sql);
+				prepareStatement.executeUpdate();
+	            prepareStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		
+		}
+		
+		public void excluir(int id) {
+			String sql = "delete from comissionado where id_comissionado='"+id+"';";
+			System.out.println(sql);
+	        try {
+	    		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+	    		prepareStatement.executeUpdate();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}             		
+		}
 }

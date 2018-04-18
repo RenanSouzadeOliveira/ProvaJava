@@ -19,37 +19,36 @@ public class AssalariadoJdbcDao {
 	}
 
 	public void salvar(Assalariado c) throws SQLException {
-		String sql = "insert into salario(salario) values ('"+c.getSalario()+"')"; ;
+		String sql = "insert into assalariado(Salario ) values ('"+c.getSalario()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
         prepareStatement.close();
 	}
 	public void listar1() {
-		String sql = "select * from salario";
+		String sql = "select * from assalariado";
         System.out.println(sql);
         
 	}
         
 		public List<Assalariado> listar() {
-			String sql = "select * from salario";
+			String sql = "select * from assalariado";
 	        System.out.println(sql);
-		List<Assalariado> assalariado = new ArrayList<Assalariado>();
+		List<Assalariado> Assalariado = new ArrayList<Assalariado>();
 		try {
 			PreparedStatement prepareStatement1 = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement1.executeQuery();
 			while (rs.next()) {
 
-				float salario = rs.getFloat("salario");
+				String salario = rs.getString("Salario");
+				
+				Assalariado assalariado = new Assalariado();
+
+				assalariado.setSalario(salario);
 				
 
-				Assalariado assalariados = new Assalariado();
-
-				assalariados.setSalario(salario);
+				System.out.println("\n" + assalariado.getSalario());
 				
-
-				System.out.println("\n" + assalariados.getSalario());
-			
 
 				System.out.println("\n**********outra pessoa*********");
 
@@ -57,7 +56,32 @@ public class AssalariadoJdbcDao {
 			prepareStatement1.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}return Assalariado;
+	}
+		public void alterar(Assalariado c) throws SQLException {
+			String sql = "update assalariado set Salario='"+c.getSalario()+"';";
+			System.out.println(sql);
+			PreparedStatement prepareStatement;
+			try {
+				prepareStatement = this.conn.prepareStatement(sql);
+				prepareStatement.executeUpdate();
+	            prepareStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}		
 		}
-		return assalariado;
-		}
-		}
+		
+		public void excluir(int id) {
+			String sql = "delete from assalariado where id_salario='"+id+"';";
+			System.out.println(sql);
+	        try {
+	    		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+	    		prepareStatement.executeUpdate();
+				prepareStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}             		
+		
+		
+	}
+}
